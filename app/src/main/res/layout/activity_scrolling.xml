@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    ​
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/materialup.appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:fitsSystemWindows="true">
+
+
+        ​
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/main.collapsing"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            app:expandedTitleMarginStart="48dp"
+            app:expandedTitleMarginEnd="64dp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            >
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/materialup.profile_image"
+                    android:layout_width="144dp"
+                    android:layout_height="144dp"
+                    android:layout_centerInParent="true"
+                    android:src="@mipmap/ic_avatar"
+                    android:elevation="8dp"
+                    app:border_width="2dp"
+                    app:border_color="#FFF"
+                    app:layout_scrollFlags="scroll"
+                    />​
+
+            </RelativeLayout>
+            ​
+
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/materialup.toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@android:color/transparent"
+                app:theme="@style/ThemeOverlay.AppCompat.Light"
+                app:layout_collapseMode="pin"
+                style="@style/ToolBarWithNavigationBack"
+               />
+
+
+            <LinearLayout
+                android:id="@+id/materialup.title_container"
+                android:layout_width="wrap_content"
+                android:layout_height="?actionBarSize"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginBottom="20dp"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                android:layout_gravity="bottom|center_horizontal">
+                ​
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+                    android:text="Angelo Moroni"
+                    />
+                ​
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle"
+                    android:text="Codemonkey Android"
+                    android:textColor="@android:color/white"
+                    />
+                ​
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                android:gravity="center"
+                android:text="Il mio profilo"
+                android:textSize="22sp"
+                app:layout_collapseMode="pin"
+                android:id="@+id/title_page"/>
+
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+        ​​
+
+    </android.support.design.widget.AppBarLayout>
+    ​
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:lineSpacingExtra="8dp"
+            android:text="@string/large_text"
+            android:padding="@dimen/activity_horizontal_margin"
+            />
+    </android.support.v4.widget.NestedScrollView>
+    ​
+
+    ​
+</android.support.design.widget.CoordinatorLayout>
