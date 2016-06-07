@@ -127,7 +127,13 @@ public class ScrollingActivity extends AppCompatActivity
             mProfileImage.setLayoutParams(params1);
             mProfileImage.setAlpha(1- (percentage*2.0F/100.0F));
 
-            mTitlePage.setAlpha(1- (percentage/100.0F));
+//            mProfileImage.setAlpha(alpha);
+
+
+            float div = (percentage * (percentage <90?1:1.5F)/100.0F);
+            float alpha = 1 - div;
+//            Log.d("ScrollingActivity","Alpha: "+ alpha);
+            mTitlePage.setAlpha(alpha <0 ? 0:alpha);
 
             FrameLayout.LayoutParams params2 = (FrameLayout.LayoutParams) picContainer.getLayoutParams();
             params2.topMargin = (int) ((px2 * percentage*4.5)/100.0);
