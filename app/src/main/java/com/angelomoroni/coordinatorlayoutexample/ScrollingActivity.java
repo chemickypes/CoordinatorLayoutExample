@@ -92,6 +92,8 @@ public class ScrollingActivity extends AppCompatActivity
 
     @Override
     public void onOffsetChanged(AppBarLayout appBarLayout, int i) {
+
+        helper.closeAllOpenPositions();
         if (mMaxScrollSize == 0)
             mMaxScrollSize = appBarLayout.getTotalScrollRange();
 
