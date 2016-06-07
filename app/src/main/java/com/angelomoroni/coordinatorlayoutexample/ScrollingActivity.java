@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +33,7 @@ public class ScrollingActivity extends AppCompatActivity
 
 
     private ImageView mProfileImage;
+    private View picContainer;
     private int mMaxScrollSize;
     private LinearLayout mTitleContainer;
 
@@ -43,6 +45,7 @@ public class ScrollingActivity extends AppCompatActivity
     private View header,footer;
     private FloatingActionButton fab;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +53,7 @@ public class ScrollingActivity extends AppCompatActivity
 
         AppBarLayout appbarLayout = (AppBarLayout) findViewById(R.id.materialup_appbar);
         mProfileImage = (ImageView) findViewById(R.id.materialup_profile_image);
+        picContainer = findViewById(R.id.pic_container);
         mTitleContainer = (LinearLayout) findViewById(R.id.materialup_title_container);
         mTitlePage = (TextView) findViewById(R.id.title_page);
 
@@ -108,6 +112,7 @@ public class ScrollingActivity extends AppCompatActivity
 
             Resources r = getResources();
             int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20, r.getDisplayMetrics());
+            int px2 = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 55, r.getDisplayMetrics());
 
             int imgPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 120, r.getDisplayMetrics());
 
@@ -116,12 +121,19 @@ public class ScrollingActivity extends AppCompatActivity
             mTitleContainer.setLayoutParams(params);
 
             RelativeLayout.LayoutParams params1 = (RelativeLayout.LayoutParams) mProfileImage.getLayoutParams();
-            params1.width = (int) (imgPx - (imgPx * (percentage*2.5f /100.0)));
-            params1.height = (int) (imgPx - (imgPx * (percentage*2.5f /100.0)));
+            params1.width = (int) (imgPx - (imgPx * (percentage*1.5f /100.0)));
+            params1.height = (int) (imgPx - (imgPx * (percentage*1.5f /100.0)));
+
             mProfileImage.setLayoutParams(params1);
-            mProfileImage.setAlpha(1- (percentage*2.5F/100.0F));
+            mProfileImage.setAlpha(1- (percentage*2.0F/100.0F));
 
             mTitlePage.setAlpha(1- (percentage/100.0F));
+
+            FrameLayout.LayoutParams params2 = (FrameLayout.LayoutParams) picContainer.getLayoutParams();
+            params2.topMargin = (int) ((px2 * percentage*4.5)/100.0);
+            Log.d("ScrollingActivity","TopMargin Pic: "+ params2.topMargin);
+            Log.d("ScrollingActivity","TPercentage: "+ percentage);
+            picContainer.setLayoutParams(params2);
         }
 
     }
