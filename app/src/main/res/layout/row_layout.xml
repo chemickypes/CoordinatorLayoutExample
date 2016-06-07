@@ -46,6 +46,5 @@
         android:background="@android:color/white"
         android:text="Large Text"
         android:id="@+id/tv_country"
-        android:padding="20dp"
-        android:visibility="gone"/>
+        android:padding="20dp"/>
 </FrameLayout>
