@@ -3,6 +3,7 @@ package com.angelomoroni.coordinatorlayoutexample;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -51,8 +52,30 @@ public class AliasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view;
+        RecyclerView.ViewHolder viewHolder = null;
+        switch (viewType){
+            case HEADER:
+                viewHolder = new HeaderViewHolder(header);
+                break;
+            case TITLE_SECTION:
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.title_section_layout, parent, false);
+                viewHolder = new TitleSectionViewHolder(view);
+                break;
+            case MAIN_FIELD:
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_layout, parent, false);
+                viewHolder = new NotSwipeViewHolder(view);
+                break;
+            case SECONDARY_FIELD:
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_layout, parent, false);
+                viewHolder = new ViewHolder(view);
+                break;
+            case FOOTER:
+                viewHolder = new FooterViewHolder(footer);
+                break;
+        }
 
-        return null;
+        return viewHolder;
     }
 
     @Override
@@ -133,6 +156,14 @@ public class AliasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private class FooterViewHolder extends RecyclerView.ViewHolder {
         public FooterViewHolder(View view) {
             super(view);
+        }
+    }
+
+    private class TitleSectionViewHolder extends RecyclerView.ViewHolder {
+        TextView tv_country;
+        public TitleSectionViewHolder(View view) {
+            super(view);
+            tv_country = (TextView)view.findViewById(R.id.tv_country);
         }
     }
 }
