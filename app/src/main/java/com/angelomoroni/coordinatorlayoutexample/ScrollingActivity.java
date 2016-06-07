@@ -78,7 +78,8 @@ public class ScrollingActivity extends AppCompatActivity
         recyclerView.setLayoutManager(layoutManager);
 
         helper = new SwipeOpenItemTouchHelper(new SwipeOpenItemTouchHelper.SimpleCallback(
-                SwipeOpenItemTouchHelper.START ));
+                SwipeOpenItemTouchHelper.START | SwipeOpenItemTouchHelper.END));
+        helper.setPreventZeroSizeViewSwipes(true);
 
         header = LayoutInflater.from(this).inflate(R.layout.header_list, recyclerView, false);
         footer = LayoutInflater.from(this).inflate(R.layout.footer_list, recyclerView, false);
