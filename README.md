@@ -1,7 +1,13 @@
 # CoordinatorLayoutExample
-A simple App to show how to use CoordinatorLayout to make profile Activity
+A simple App to show how to use CoordinatorLayout to make profile Activity.
 
 ![gif coordinator layout][gif1]
+
+ -- *New Version*
+ 
+ In this new version there is a complicated Adapter with Header, Footer, Sections, Static Row and Swipeable Row.
+ 
+ ![gif coordinator layout with recycler view][gif2]
 
 ## Useful link
 1.[Saulum Page - Mastering the Coordinator Layout][1]
@@ -18,3 +24,4 @@ A simple App to show how to use CoordinatorLayout to make profile Activity
 
 
 [gif1]:http://www.angelomoroni.com/images/coordinator_layout.gif
+[gif2]:http://www.angelomoroni.com/images/coordinator_layout2.gif
