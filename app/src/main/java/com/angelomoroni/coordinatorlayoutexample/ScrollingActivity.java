@@ -6,6 +6,8 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.util.TypedValue;
@@ -17,6 +19,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class ScrollingActivity extends AppCompatActivity
         implements AppBarLayout.OnOffsetChangedListener{
@@ -32,6 +36,9 @@ public class ScrollingActivity extends AppCompatActivity
 
     int lastPercentageScroll = 0;
     private TextView mTitlePage;
+    private RecyclerView recyclerView;
+    private ArrayList<String> countries;
+    private DataAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +60,24 @@ public class ScrollingActivity extends AppCompatActivity
         appbarLayout.addOnOffsetChangedListener(this);
         mMaxScrollSize = appbarLayout.getTotalScrollRange();
 
+        setList();
 
+
+    }
+
+    private void setList() {
+        recyclerView = (RecyclerView)findViewById(R.id.card_recycler_view);
+        recyclerView.setHasFixedSize(true);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(layoutManager);
+        adapter = new DataAdapter(countries);
+        recyclerView.setAdapter(adapter);
+        countries.add("Australia");
+        countries.add("India");
+        countries.add("United States of America");
+        countries.add("Germany");
+        countries.add("Russia");
+        adapter.notifyDataSetChanged();
     }
 
     @Override
