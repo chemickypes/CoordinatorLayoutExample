@@ -39,7 +39,7 @@ public class AliasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         emails = new ArrayList<>();
         phones = new ArrayList<>();
         sections[0] = 1;
-        sections[1] = 2+emails.size();
+        sections[1] = 3+emails.size();
 
         viewTypeList.add(0,HEADER);
         viewTypeList.add(1,TITLE_SECTION);
@@ -82,7 +82,15 @@ public class AliasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
         if(viewHolder instanceof ViewHolder){
             ViewHolder v = (ViewHolder) viewHolder;
+
+            if(position<sections[1]){
+                v.tv_country.setText(emails.get(position-(sections[0]+2)));
+            }else {
+                v.tv_country.setText(phones.get(position-(sections[1]+2)));
+            }
             //v.tv_country.setText(countries.get(getPosition(i)));
+
+
         }else if(viewHolder instanceof NotSwipeViewHolder) {
             NotSwipeViewHolder v = (NotSwipeViewHolder) viewHolder;
             if(position == 2){
@@ -101,7 +109,7 @@ public class AliasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     @Override
     public int getItemCount() {
-        return viewTypeList.size()+emails.size()+phones.size();
+        return viewTypeList.size();
     }
 
     @Override
@@ -109,6 +117,31 @@ public class AliasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 //        return super.getItemViewType(position);
         return viewTypeList.get(position);
     }
+
+    public void addEmail(String em) {
+        if(emails.size() <2) {
+
+            int indToAdd = sections[1];
+            viewTypeList.add(indToAdd, SECONDARY_FIELD);
+            emails.add(em);
+            sections[1] += 1 ;
+
+            notifyItemInserted(indToAdd);
+
+        }
+
+    }
+
+    public void addPhonNumber(String pn) {
+        if(phones.size()<2){
+            int indToAdd = getItemCount()-1;
+            viewTypeList.add(indToAdd,SECONDARY_FIELD);
+            phones.add(pn);
+
+            notifyItemInserted(indToAdd);
+        }
+    }
+
 
     public class NotSwipeViewHolder extends RecyclerView.ViewHolder {
         TextView tv_country;

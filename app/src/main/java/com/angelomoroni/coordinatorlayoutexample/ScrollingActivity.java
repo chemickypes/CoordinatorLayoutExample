@@ -4,6 +4,7 @@ import android.content.res.Resources;
 
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,12 +21,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import atownsend.swipeopenhelper.SwipeOpenItemTouchHelper;
 
 
 public class ScrollingActivity extends AppCompatActivity
-        implements AppBarLayout.OnOffsetChangedListener, DataAdapter.OnItemClickListener {
+        implements AppBarLayout.OnOffsetChangedListener, DataAdapter.OnItemClickListener, View.OnClickListener {
 
 
     /*private static final int PERCENTAGE_TO_ANIMATE_AVATAR = 20;
@@ -42,6 +44,7 @@ public class ScrollingActivity extends AppCompatActivity
     private AliasAdapter aliasAdapter;
     private SwipeOpenItemTouchHelper helper;
     private View header,footer;
+    private FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +65,9 @@ public class ScrollingActivity extends AppCompatActivity
 
         appbarLayout.addOnOffsetChangedListener(this);
         mMaxScrollSize = appbarLayout.getTotalScrollRange();
+
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(this);
 
         setList();
 
@@ -170,5 +176,21 @@ public class ScrollingActivity extends AppCompatActivity
     @Override
     public void onItemClick(String s) {
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v.getId() == R.id.fab){
+            addRandomAlias();
+        }
+    }
+
+    private void addRandomAlias() {
+        Random random = new Random();
+        if(random.nextInt()%2 == 0){
+            aliasAdapter.addEmail("secondary@email.it");
+        } else {
+            aliasAdapter.addPhonNumber("+393334422112");
+        }
     }
 }
