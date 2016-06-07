@@ -20,7 +20,8 @@
         android:layout_height="match_parent"
         android:orientation="horizontal"
         android:id="@+id/button_panel"
-        android:gravity="end">
+        android:gravity="end"
+        android:background="@color/green900">
 
         <ImageView
             android:id="@+id/verify_button"
