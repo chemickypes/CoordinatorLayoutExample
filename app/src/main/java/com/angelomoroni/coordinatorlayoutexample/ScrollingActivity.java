@@ -37,7 +37,7 @@ public class ScrollingActivity extends AppCompatActivity
     int lastPercentageScroll = 0;
     private TextView mTitlePage;
     private RecyclerView recyclerView;
-    private ArrayList<String> countries;
+    private ArrayList<String> countries = new ArrayList<>();
     private DataAdapter adapter;
 
     @Override
@@ -70,14 +70,14 @@ public class ScrollingActivity extends AppCompatActivity
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new DataAdapter(countries);
+        adapter = new DataAdapter();
         recyclerView.setAdapter(adapter);
-        countries.add("Australia");
-        countries.add("India");
-        countries.add("United States of America");
-        countries.add("Germany");
-        countries.add("Russia");
-        adapter.notifyDataSetChanged();
+        adapter.add("Australia");
+        adapter.add("India");
+        adapter.add("United States of America");
+        adapter.add("Germany");
+        adapter.add("Russia");
+        //adapter.notifyDataSetChanged();
     }
 
     @Override

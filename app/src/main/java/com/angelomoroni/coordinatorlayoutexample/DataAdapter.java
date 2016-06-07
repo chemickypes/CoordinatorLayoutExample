@@ -16,8 +16,8 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
 
     private ArrayList<String> countries;
 
-    public DataAdapter(ArrayList<String> countries) {
-        this.countries = new ArrayList<>(countries);
+    public DataAdapter() {
+        this.countries = new ArrayList<>();
     }
 
     @Override
@@ -47,6 +47,11 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, countries.size());
     }
+
+    public void add(String country) {
+        addItem(country);
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView tv_country;
         public ViewHolder(View view) {
