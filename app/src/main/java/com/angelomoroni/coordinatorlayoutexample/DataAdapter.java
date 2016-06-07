@@ -20,6 +20,7 @@ import atownsend.swipeopenhelper.SwipeOpenItemTouchHelper;
  */
 public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    private static final int HEADER = 90;
     private final SwipeOpenItemTouchHelper helper;
     private ArrayList<String> countries;
 
@@ -31,6 +32,10 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_layout, viewGroup, false);
+        if(i == HEADER){
+            return new HeaderViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.header_list, viewGroup, false));
+        }
+
         if(i ==0) {
             return new ViewHolder(view);
         }else {
@@ -44,17 +49,23 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         if(viewHolder instanceof ViewHolder){
             ViewHolder v = (ViewHolder) viewHolder;
-            v.tv_country.setText(countries.get(i));
-        }else {
+            v.tv_country.setText(countries.get(getPosition(i)));
+        }else if(viewHolder instanceof NotSwipeViewHolder) {
             NotSwipeViewHolder v = (NotSwipeViewHolder) viewHolder;
-            v.tv_country.setText(countries.get(i));
+            v.tv_country.setText(countries.get(getPosition(i)));
+        }else {
+            //nothing
         }
        // viewHolder.tv_country.setText(countries.get(i));
     }
 
+    private int getPosition(int i) {
+        return i-1;
+    }
+
     @Override
     public int getItemCount() {
-        return countries.size();
+        return countries.size()+1;
     }
 
     public void addItem(String country) {
@@ -75,6 +86,7 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public int getItemViewType(int position) {
         //return super.getItemViewType(position);
+        if(position == 0) return HEADER;
         return (position %2 );
     }
 
@@ -95,6 +107,8 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
 
     }
+
+
 
     public class ViewHolder extends BaseSwipeOpenViewHolder {
         TextView tv_country;
@@ -132,5 +146,11 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public interface OnItemClickListener{
         void onItemClick(String s);
+    }
+
+    private class HeaderViewHolder extends RecyclerView.ViewHolder {
+        public HeaderViewHolder(View view) {
+            super(view);
+        }
     }
 }

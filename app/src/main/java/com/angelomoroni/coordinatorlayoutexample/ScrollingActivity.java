@@ -92,6 +92,9 @@ public class ScrollingActivity extends AppCompatActivity
         adapter.add("United States of America");
         adapter.add("Germany");
         adapter.add("Russia");
+        adapter.add("Italy");
+        adapter.add("France");
+        adapter.add("Spain");
         //adapter.notifyDataSetChanged();
 
 
