@@ -18,6 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -49,7 +50,9 @@ public class ScrollingActivity extends AppCompatActivity
     private RecyclerView recyclerView;
     private ArrayList<String> countries = new ArrayList<>();
     private DataAdapter adapter;
+    private AliasAdapter aliasAdapter;
     private SwipeOpenItemTouchHelper helper;
+    private View header,footer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,19 +88,22 @@ public class ScrollingActivity extends AppCompatActivity
         helper = new SwipeOpenItemTouchHelper(new SwipeOpenItemTouchHelper.SimpleCallback(
                 SwipeOpenItemTouchHelper.START ));
 
-        adapter = new DataAdapter(helper,this);
-        recyclerView.setAdapter(adapter);
-        adapter.add("Australia");
-        adapter.add("India");
-        adapter.add("United States of America");
-        adapter.add("Germany");
-        adapter.add("Russia");
-        adapter.add("Italy");
-        adapter.add("France");
-        adapter.add("Spain");
+//        adapter = new DataAdapter(helper,this);
+//        recyclerView.setAdapter(adapter);
+//        adapter.add("Australia");
+//        adapter.add("India");
+//        adapter.add("United States of America");
+//        adapter.add("Germany");
+//        adapter.add("Russia");
+//        adapter.add("Italy");
+//        adapter.add("France");
+//        adapter.add("Spain");
         //adapter.notifyDataSetChanged();
 
-
+        header = LayoutInflater.from(this).inflate(R.layout.header_list, recyclerView, true);
+        footer = LayoutInflater.from(this).inflate(R.layout.footer_list, recyclerView, true);
+        aliasAdapter = new AliasAdapter(header,footer,"angelo@bemind.me","3395566777");
+        recyclerView.setAdapter(aliasAdapter);
 
         helper.attachToRecyclerView(recyclerView);
         helper.setCloseOnAction(true);
