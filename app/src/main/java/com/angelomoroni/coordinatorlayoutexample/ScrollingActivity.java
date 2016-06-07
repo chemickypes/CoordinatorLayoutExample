@@ -29,6 +29,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import atownsend.swipeopenhelper.SwipeOpenItemTouchHelper;
+
 public class ScrollingActivity extends AppCompatActivity
         implements AppBarLayout.OnOffsetChangedListener{
 
@@ -46,6 +48,7 @@ public class ScrollingActivity extends AppCompatActivity
     private RecyclerView recyclerView;
     private ArrayList<String> countries = new ArrayList<>();
     private DataAdapter adapter;
+    private SwipeOpenItemTouchHelper helper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,52 +89,14 @@ public class ScrollingActivity extends AppCompatActivity
         adapter.add("Russia");
         //adapter.notifyDataSetChanged();
 
-        initSwipe();
+        helper = new SwipeOpenItemTouchHelper(new SwipeOpenItemTouchHelper.SimpleCallback(
+                SwipeOpenItemTouchHelper.START ));
+
+        helper.attachToRecyclerView(recyclerView);
+        helper.setCloseOnAction(true);
     }
 
-    private void initSwipe(){
-        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT ) {
 
-            @Override
-            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-                return false;
-            }
-
-            @Override
-            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                int position = viewHolder.getAdapterPosition();
-
-                if (direction == ItemTouchHelper.LEFT){
-                    adapter.removeItem(position);
-                }
-            }
-
-            @Override
-            public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
-
-                 Paint p = new Paint();
-                Bitmap icon;
-                if(actionState == ItemTouchHelper.ACTION_STATE_SWIPE){
-
-                    View itemView = viewHolder.itemView;
-                    float height = (float) itemView.getBottom() - (float) itemView.getTop();
-                    float width = height / 3;
-
-                    if(dX < 0){
-                        p.setColor(Color.parseColor("#f3f3f3"));
-                        RectF background = new RectF((float) itemView.getRight() + dX, (float) itemView.getTop(),(float) itemView.getRight(), (float) itemView.getBottom());
-                        c.drawRect(background,p);
-                        icon = BitmapFactory.decodeResource(getResources(), android.R.drawable.ic_delete);
-                        RectF icon_dest = new RectF((float) itemView.getRight() - 2*width ,(float) itemView.getTop() + width,(float) itemView.getRight() - width,(float)itemView.getBottom() - width);
-                        c.drawBitmap(icon,null,icon_dest,p);
-                    }
-                }
-                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
-            }
-        };
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
-        itemTouchHelper.attachToRecyclerView(recyclerView);
-    }
 
     @Override
     public void onOffsetChanged(AppBarLayout appBarLayout, int i) {

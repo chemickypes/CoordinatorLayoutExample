@@ -1,6 +1,9 @@
 package com.angelomoroni.coordinatorlayoutexample;
 
+import android.graphics.Color;
 import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,10 +12,12 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import atownsend.swipeopenhelper.BaseSwipeOpenViewHolder;
+
 /**
  * Created by debug on 07/06/16.
  */
-public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
+public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private ArrayList<String> countries;
 
@@ -21,15 +26,27 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
     }
 
     @Override
-    public DataAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_layout, viewGroup, false);
-        return new ViewHolder(view);
+        if(i ==0) {
+            return new ViewHolder(view);
+        }else {
+            return new NotSwipeViewHolder(view);
+        }
+
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int i) {
 
-        viewHolder.tv_country.setText(countries.get(i));
+        if(viewHolder instanceof ViewHolder){
+            ViewHolder v = (ViewHolder) viewHolder;
+            v.tv_country.setText(countries.get(i));
+        }else {
+            NotSwipeViewHolder v = (NotSwipeViewHolder) viewHolder;
+            v.tv_country.setText(countries.get(i));
+        }
+       // viewHolder.tv_country.setText(countries.get(i));
     }
 
     @Override
@@ -52,12 +69,45 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
         addItem(country);
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    @Override
+    public int getItemViewType(int position) {
+        //return super.getItemViewType(position);
+        return (position %2 );
+    }
+
+    public class NotSwipeViewHolder extends RecyclerView.ViewHolder {
+        TextView tv_country;
+        public NotSwipeViewHolder(View view) {
+            super(view);
+
+            tv_country = (TextView)view.findViewById(R.id.tv_country);
+            tv_country.setTextColor(Color.parseColor("#987564"));
+        }
+
+    }
+
+    public class ViewHolder extends BaseSwipeOpenViewHolder {
         TextView tv_country;
         public ViewHolder(View view) {
             super(view);
 
             tv_country = (TextView)view.findViewById(R.id.tv_country);
+        }
+
+        @NonNull
+        @Override
+        public View getSwipeView() {
+            return tv_country;
+        }
+
+        @Override
+        public float getEndHiddenViewSize() {
+            return 200;
+        }
+
+        @Override
+        public float getStartHiddenViewSize() {
+            return 200;
         }
     }
 }
