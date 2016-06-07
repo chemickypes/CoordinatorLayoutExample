@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="This is an FOOTER"
+        android:text="This is a FOOTER"
         android:textColor="@android:color/white"
         android:textAllCaps="true"
         android:textStyle="bold"

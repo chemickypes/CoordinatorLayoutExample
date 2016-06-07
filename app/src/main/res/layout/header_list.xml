@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="This is an Header"
+        android:text="This is a Header"
         android:textColor="@android:color/white"
         android:textAllCaps="true"
         android:textStyle="bold"
