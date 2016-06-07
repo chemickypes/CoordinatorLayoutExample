@@ -79,8 +79,24 @@ public class AliasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
+        if(viewHolder instanceof ViewHolder){
+            ViewHolder v = (ViewHolder) viewHolder;
+            //v.tv_country.setText(countries.get(getPosition(i)));
+        }else if(viewHolder instanceof NotSwipeViewHolder) {
+            NotSwipeViewHolder v = (NotSwipeViewHolder) viewHolder;
+            if(position == 2){
+                v.tv_country.setText(mainEmail);
+            }else {
+                v.tv_country.setText(mainPhoneNumber);
+            }
 
+        }else if( viewHolder instanceof TitleSectionViewHolder){
+            TitleSectionViewHolder t = (TitleSectionViewHolder) viewHolder;
+            t.tv_country.setText(position == sections[0]?"INDIRIZZI EMAIL":"NUMERI DI TELEFONO");
+        }else {
+            //nothing
+        }
     }
 
     @Override
