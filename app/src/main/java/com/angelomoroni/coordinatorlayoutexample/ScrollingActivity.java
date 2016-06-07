@@ -131,8 +131,8 @@ public class ScrollingActivity extends AppCompatActivity
 
             FrameLayout.LayoutParams params2 = (FrameLayout.LayoutParams) picContainer.getLayoutParams();
             params2.topMargin = (int) ((px2 * percentage*4.5)/100.0);
-            Log.d("ScrollingActivity","TopMargin Pic: "+ params2.topMargin);
-            Log.d("ScrollingActivity","TPercentage: "+ percentage);
+//            Log.d("ScrollingActivity","TopMargin Pic: "+ params2.topMargin);
+//            Log.d("ScrollingActivity","TPercentage: "+ percentage);
             picContainer.setLayoutParams(params2);
         }
 
