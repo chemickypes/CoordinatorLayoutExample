@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Random;
 
@@ -26,7 +27,7 @@ import atownsend.swipeopenhelper.SwipeOpenItemTouchHelper;
 
 
 public class ScrollingActivity extends AppCompatActivity
-        implements AppBarLayout.OnOffsetChangedListener, DataAdapter.OnItemClickListener, View.OnClickListener {
+        implements AppBarLayout.OnOffsetChangedListener, DataAdapter.OnItemClickListener, View.OnClickListener, AliasAdapter.OnRowClickListener {
 
 
 
@@ -81,7 +82,7 @@ public class ScrollingActivity extends AppCompatActivity
 
         header = LayoutInflater.from(this).inflate(R.layout.header_list, recyclerView, false);
         footer = LayoutInflater.from(this).inflate(R.layout.footer_list, recyclerView, false);
-        aliasAdapter = new AliasAdapter(header,footer,"angelo@bemind.me","3395566777",helper);
+        aliasAdapter = new AliasAdapter(header,footer,"angelo@bemind.me","3395566777",helper,this);
         recyclerView.setAdapter(aliasAdapter);
 
         helper.attachToRecyclerView(recyclerView);
@@ -164,5 +165,20 @@ public class ScrollingActivity extends AppCompatActivity
         } else {
             aliasAdapter.addPhonNumber("+393334422112");
         }
+    }
+
+    @Override
+    public void onVerifyClick(String item) {
+        Toast.makeText(this,item,Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onDeleteClick(String item) {
+        Toast.makeText(this,item,Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onAliasClick(String item) {
+
     }
 }
