@@ -31,8 +31,9 @@ import java.util.ArrayList;
 
 import atownsend.swipeopenhelper.SwipeOpenItemTouchHelper;
 
+
 public class ScrollingActivity extends AppCompatActivity
-        implements AppBarLayout.OnOffsetChangedListener{
+        implements AppBarLayout.OnOffsetChangedListener, DataAdapter.OnItemClickListener {
 
 
     /*private static final int PERCENTAGE_TO_ANIMATE_AVATAR = 20;
@@ -80,7 +81,11 @@ public class ScrollingActivity extends AppCompatActivity
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new DataAdapter();
+
+        helper = new SwipeOpenItemTouchHelper(new SwipeOpenItemTouchHelper.SimpleCallback(
+                SwipeOpenItemTouchHelper.START ));
+
+        adapter = new DataAdapter(helper,this);
         recyclerView.setAdapter(adapter);
         adapter.add("Australia");
         adapter.add("India");
@@ -89,8 +94,7 @@ public class ScrollingActivity extends AppCompatActivity
         adapter.add("Russia");
         //adapter.notifyDataSetChanged();
 
-        helper = new SwipeOpenItemTouchHelper(new SwipeOpenItemTouchHelper.SimpleCallback(
-                SwipeOpenItemTouchHelper.START ));
+
 
         helper.attachToRecyclerView(recyclerView);
         helper.setCloseOnAction(true);
@@ -163,5 +167,10 @@ public class ScrollingActivity extends AppCompatActivity
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onItemClick(String s) {
+
     }
 }

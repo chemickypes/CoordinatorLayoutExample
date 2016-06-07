@@ -13,16 +13,19 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import atownsend.swipeopenhelper.BaseSwipeOpenViewHolder;
+import atownsend.swipeopenhelper.SwipeOpenItemTouchHelper;
 
 /**
  * Created by debug on 07/06/16.
  */
 public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    private final SwipeOpenItemTouchHelper helper;
     private ArrayList<String> countries;
 
-    public DataAdapter() {
+    public DataAdapter(SwipeOpenItemTouchHelper helper, OnItemClickListener listener) {
         this.countries = new ArrayList<>();
+        this.helper = helper;
     }
 
     @Override
@@ -82,6 +85,13 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             tv_country = (TextView)view.findViewById(R.id.tv_country);
             tv_country.setTextColor(Color.parseColor("#987564"));
+
+            tv_country.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    helper.closeAllOpenPositions();
+                }
+            });
         }
 
     }
@@ -91,7 +101,15 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         public ViewHolder(View view) {
             super(view);
 
+
             tv_country = (TextView)view.findViewById(R.id.tv_country);
+
+            tv_country.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    helper.closeAllOpenPositions();
+                }
+            });
         }
 
         @NonNull
@@ -107,7 +125,12 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         @Override
         public float getStartHiddenViewSize() {
-            return 200;
+            return 0;
         }
+    }
+
+
+    public interface OnItemClickListener{
+        void onItemClick(String s);
     }
 }
