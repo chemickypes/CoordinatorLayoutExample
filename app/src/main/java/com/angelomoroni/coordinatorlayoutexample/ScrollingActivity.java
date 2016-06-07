@@ -27,7 +27,7 @@ import atownsend.swipeopenhelper.SwipeOpenItemTouchHelper;
 
 
 public class ScrollingActivity extends AppCompatActivity
-        implements AppBarLayout.OnOffsetChangedListener, DataAdapter.OnItemClickListener, View.OnClickListener, AliasAdapter.OnRowClickListener {
+        implements AppBarLayout.OnOffsetChangedListener, View.OnClickListener, AliasAdapter.OnRowClickListener {
 
 
 
@@ -146,10 +146,7 @@ public class ScrollingActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onItemClick(String s) {
 
-    }
 
     @Override
     public void onClick(View v) {
