@@ -20,7 +20,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 import atownsend.swipeopenhelper.SwipeOpenItemTouchHelper;
@@ -30,9 +29,6 @@ public class ScrollingActivity extends AppCompatActivity
         implements AppBarLayout.OnOffsetChangedListener, DataAdapter.OnItemClickListener, View.OnClickListener {
 
 
-    /*private static final int PERCENTAGE_TO_ANIMATE_AVATAR = 20;
-    private static final String TAG = "ACTIVITY MATERIAL";
-    private boolean mIsAvatarShown = true;*/
 
     private ImageView mProfileImage;
     private int mMaxScrollSize;
@@ -83,21 +79,9 @@ public class ScrollingActivity extends AppCompatActivity
         helper = new SwipeOpenItemTouchHelper(new SwipeOpenItemTouchHelper.SimpleCallback(
                 SwipeOpenItemTouchHelper.START ));
 
-//        adapter = new DataAdapter(helper,this);
-//        recyclerView.setAdapter(adapter);
-//        adapter.add("Australia");
-//        adapter.add("India");
-//        adapter.add("United States of America");
-//        adapter.add("Germany");
-//        adapter.add("Russia");
-//        adapter.add("Italy");
-//        adapter.add("France");
-//        adapter.add("Spain");
-        //adapter.notifyDataSetChanged();
-
         header = LayoutInflater.from(this).inflate(R.layout.header_list, recyclerView, false);
         footer = LayoutInflater.from(this).inflate(R.layout.footer_list, recyclerView, false);
-        aliasAdapter = new AliasAdapter(header,footer,"angelo@bemind.me","3395566777");
+        aliasAdapter = new AliasAdapter(header,footer,"angelo@bemind.me","3395566777",helper);
         recyclerView.setAdapter(aliasAdapter);
 
         helper.attachToRecyclerView(recyclerView);
@@ -113,20 +97,6 @@ public class ScrollingActivity extends AppCompatActivity
 
         int percentage = (Math.abs(i)) * 100 / mMaxScrollSize;
 
-       /* if (percentage >= PERCENTAGE_TO_ANIMATE_AVATAR && mIsAvatarShown) {
-            mIsAvatarShown = false;
-            mProfileImage.animate().scaleY(0).scaleX(0).setDuration(200).start();
-        }
-
-        if (percentage <= PERCENTAGE_TO_ANIMATE_AVATAR && !mIsAvatarShown) {
-            mIsAvatarShown = true;
-
-            mProfileImage.animate()
-                    .scaleY(1).scaleX(1)
-                    .start();
-        }*/
-
-        //Log.d(TAG,"percentage:"+percentage);
 
         if(lastPercentageScroll != percentage) {
             lastPercentageScroll = percentage;

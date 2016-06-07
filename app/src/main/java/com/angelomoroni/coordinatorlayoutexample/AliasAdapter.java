@@ -11,6 +11,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import atownsend.swipeopenhelper.BaseSwipeOpenViewHolder;
+import atownsend.swipeopenhelper.SwipeOpenItemTouchHelper;
 
 /**
  * Created by debug on 07/06/16.
@@ -22,6 +23,7 @@ public class AliasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private static final int MAIN_FIELD = 3;
     private static final int FOOTER = 4;
     private static final int SECONDARY_FIELD = 5;
+    private final SwipeOpenItemTouchHelper helper;
 
     public View header;
     public View footer;
@@ -31,7 +33,7 @@ public class AliasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     public ArrayList<Integer> viewTypeList = new ArrayList<>();
 
-    public AliasAdapter(View header, View footer, String mainEmail, String mainPhoneNumber) {
+    public AliasAdapter(View header, View footer, String mainEmail, String mainPhoneNumber,SwipeOpenItemTouchHelper helper) {
         this.header = header;
         this.footer = footer;
         this.mainEmail = mainEmail;
@@ -47,6 +49,8 @@ public class AliasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         viewTypeList.add(3,TITLE_SECTION);
         viewTypeList.add(4,MAIN_FIELD);
         viewTypeList.add(5,FOOTER);
+
+        this.helper = helper;
 
     }
 
@@ -154,7 +158,7 @@ public class AliasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             tv_country.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //helper.closeAllOpenPositions();
+                    helper.closeAllOpenPositions();
                 }
             });
         }
@@ -174,7 +178,7 @@ public class AliasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             tv_country.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    helper.closeAllOpenPositions();
+                    helper.closeAllOpenPositions();
                 }
             });
         }
@@ -199,12 +203,26 @@ public class AliasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private class HeaderViewHolder extends RecyclerView.ViewHolder {
         public HeaderViewHolder(View view) {
             super(view);
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    helper.closeAllOpenPositions();
+                }
+            });
         }
     }
 
     private class FooterViewHolder extends RecyclerView.ViewHolder {
         public FooterViewHolder(View view) {
             super(view);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    helper.closeAllOpenPositions();
+                }
+            });
+
         }
     }
 
@@ -212,6 +230,13 @@ public class AliasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         TextView tv_country;
         public TitleSectionViewHolder(View view) {
             super(view);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    helper.closeAllOpenPositions();
+                }
+            });
+
             tv_country = (TextView)view.findViewById(R.id.tv_country);
         }
     }
