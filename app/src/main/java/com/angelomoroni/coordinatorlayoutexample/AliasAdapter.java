@@ -41,12 +41,12 @@ public class AliasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         sections[0] = 1;
         sections[1] = 2+emails.size();
 
-        viewTypeList.add(HEADER);
-        viewTypeList.add(TITLE_SECTION);
-        viewTypeList.add(MAIN_FIELD);
-        viewTypeList.add(TITLE_SECTION);
-        viewTypeList.add(MAIN_FIELD);
-        viewTypeList.add(FOOTER);
+        viewTypeList.add(0,HEADER);
+        viewTypeList.add(1,TITLE_SECTION);
+        viewTypeList.add(2,MAIN_FIELD);
+        viewTypeList.add(3,TITLE_SECTION);
+        viewTypeList.add(4,MAIN_FIELD);
+        viewTypeList.add(5,FOOTER);
 
     }
 
@@ -101,7 +101,7 @@ public class AliasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     @Override
     public int getItemCount() {
-        return 6+emails.size()+phones.size();
+        return viewTypeList.size()+emails.size()+phones.size();
     }
 
     @Override

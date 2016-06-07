@@ -1,22 +1,13 @@
 package com.angelomoroni.coordinatorlayoutexample;
 
 import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.RectF;
+
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,8 +39,6 @@ public class ScrollingActivity extends AppCompatActivity
     int lastPercentageScroll = 0;
     private TextView mTitlePage;
     private RecyclerView recyclerView;
-    private ArrayList<String> countries = new ArrayList<>();
-    private DataAdapter adapter;
     private AliasAdapter aliasAdapter;
     private SwipeOpenItemTouchHelper helper;
     private View header,footer;
@@ -100,8 +89,8 @@ public class ScrollingActivity extends AppCompatActivity
 //        adapter.add("Spain");
         //adapter.notifyDataSetChanged();
 
-        header = LayoutInflater.from(this).inflate(R.layout.header_list, recyclerView, true);
-        footer = LayoutInflater.from(this).inflate(R.layout.footer_list, recyclerView, true);
+        header = LayoutInflater.from(this).inflate(R.layout.header_list, recyclerView, false);
+        footer = LayoutInflater.from(this).inflate(R.layout.footer_list, recyclerView, false);
         aliasAdapter = new AliasAdapter(header,footer,"angelo@bemind.me","3395566777");
         recyclerView.setAdapter(aliasAdapter);
 
