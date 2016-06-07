@@ -25,13 +25,15 @@
         <ImageView
             android:id="@+id/verify_button"
             android:layout_width="wrap_content"
-            android:minWidth="?android:actionBarSize"
+            android:padding="15dp"
+            android:maxWidth="?android:actionBarSize"
             android:layout_height="match_parent"
             android:src="@drawable/ic_done_white_24dp"
             android:background="@color/green900"/>
 
         <ImageView
             android:id="@+id/delete_button"
+            android:padding="15dp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:minWidth="?android:actionBarSize"

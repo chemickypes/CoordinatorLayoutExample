@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -169,9 +170,12 @@ public class AliasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     public class ViewHolder extends BaseSwipeOpenViewHolder {
         TextView tv_country;
+        ImageView deleteB,verifyB;
         public ViewHolder(View view) {
             super(view);
 
+            deleteB = (ImageView) view.findViewById(R.id.delete_button);
+            verifyB = (ImageView) view.findViewById(R.id.verify_button);
 
             tv_country = (TextView)view.findViewById(R.id.tv_country);
 
@@ -191,7 +195,7 @@ public class AliasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         @Override
         public float getEndHiddenViewSize() {
-            return 200;
+            return deleteB.getMeasuredWidth() * 2;
         }
 
         @Override
