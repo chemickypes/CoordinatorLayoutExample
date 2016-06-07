@@ -4,16 +4,40 @@
     android:layout_height="wrap_content"
     android:minHeight="?android:actionBarSize">
 
-    <TextView
+    <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+        <!--android:background="@android:color/holo_red_dark"-->
+        <!--android:text="DELETE"-->
+        <!--android:gravity="end"-->
+        <!--android:id="@+id/tv_delete"-->
+        <!--android:textColor="@android:color/white"-->
+        <!--android:padding="20dp"/>-->
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:background="@android:color/holo_red_dark"
-        android:text="DELETE"
-        android:gravity="end"
-        android:id="@+id/tv_delete"
-        android:textColor="@android:color/white"
-        android:padding="20dp"/>
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:id="@+id/button_panel"
+        android:gravity="end">
+
+        <ImageView
+            android:id="@+id/verify_button"
+            android:layout_width="wrap_content"
+            android:minWidth="?android:actionBarSize"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_done_white_24dp"
+            android:background="@color/green900"/>
+
+        <ImageView
+            android:id="@+id/delete_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:minWidth="?android:actionBarSize"
+            android:src="@drawable/ic_delete_white_24dp"
+            android:background="@color/red900"/>
+    </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
@@ -22,5 +46,6 @@
         android:background="@android:color/white"
         android:text="Large Text"
         android:id="@+id/tv_country"
-        android:padding="20dp"/>
+        android:padding="20dp"
+        android:visibility="gone"/>
 </FrameLayout>
