@@ -25,6 +25,7 @@ public class AliasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private static final int FOOTER = 4;
     private static final int SECONDARY_FIELD = 5;
     private final SwipeOpenItemTouchHelper helper;
+    private OnRowClickListener listener;
 
     public View header;
     public View footer;
@@ -34,7 +35,7 @@ public class AliasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     public ArrayList<Integer> viewTypeList = new ArrayList<>();
 
-    public AliasAdapter(View header, View footer, String mainEmail, String mainPhoneNumber,SwipeOpenItemTouchHelper helper) {
+    public AliasAdapter(View header, View footer, String mainEmail, String mainPhoneNumber,SwipeOpenItemTouchHelper helper,OnRowClickListener listener) {
         this.header = header;
         this.footer = footer;
         this.mainEmail = mainEmail;
@@ -52,6 +53,8 @@ public class AliasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         viewTypeList.add(5,FOOTER);
 
         this.helper = helper;
+
+        this.listener = listener;
 
     }
 
@@ -175,7 +178,19 @@ public class AliasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             super(view);
 
             deleteB = (ImageView) view.findViewById(R.id.delete_button);
+            deleteB.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onDeleteClick("delete");
+                }
+            });
             verifyB = (ImageView) view.findViewById(R.id.verify_button);
+            verifyB.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onDeleteClick("verify");
+                }
+            });
 
             tv_country = (TextView)view.findViewById(R.id.tv_country);
 
@@ -243,5 +258,11 @@ public class AliasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
             tv_country = (TextView)view.findViewById(R.id.tv_country);
         }
+    }
+
+    public interface OnRowClickListener {
+        void onVerifyClick(String item);
+        void onDeleteClick(String item);
+        void onAliasClick(String item);
     }
 }
